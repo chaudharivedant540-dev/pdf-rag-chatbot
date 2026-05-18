@@ -1,0 +1,35 @@
+# Environment variables — NEVER upload this
+.env
+
+# Virtual environment — too large, not needed
+venv/
+ragenv/
+
+# Vector store — can be regenerated
+vectorstore/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Database files
+*.db
+*.sqlite
+
+# User data file (if still exists)
+users.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temp files
+*.tmp
+*.log
