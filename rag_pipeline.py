@@ -1,14 +1,14 @@
 import os 
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings 
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
-from langchain.prompts import ChatPromptTemplate
-from langchain.chains import create_retrieval_chain 
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.chains import create_history_aware_retriever
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+from langchain_classic.chains import create_history_aware_retriever
+from langchain_classic.chains import create_retrieval_chain
 from langchain_core.prompts import MessagesPlaceholder
 from langchain_core.messages import HumanMessage , AIMessage
 
@@ -192,11 +192,13 @@ def ask_question(rag_chain,question ,chat_history=[]):
             "snippet": snippet
         })
     
-    seen_pages = set()
+    seen_sources = set()
     unique_sources = []
     for s in sources:
-        if s["page"] not in seen_pages:
-            seen_pages.add(s["page"])
+        source_key =(s["source"],s["page"])
+
+        if source_key not in seen_sources:
+            seen_sources.add(source_key)
             unique_sources.append(s)
     return answer,unique_sources
 

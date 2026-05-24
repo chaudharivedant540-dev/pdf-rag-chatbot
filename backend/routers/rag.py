@@ -13,7 +13,6 @@ from rag_pipeline import process_pdfs, ask_question, load_and_build_chain, vecto
 
 router = APIRouter(prefix="/rag", tags=["RAG Pipeline"])
 
-
 @router.post("/process")
 async def process_uploaded_pdfs(
     files: list[UploadFile] = File(...),
